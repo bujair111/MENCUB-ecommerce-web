@@ -1,0 +1,208 @@
+{% extends "cust_templates/master.html" %}
+{% load static %}
+
+{% block title %} payment {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'cust_css/payment.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="main_body">
+        <!-- left -->
+        <div class="lft">
+            <div class="addres_list">
+                <div style="padding-top: 50px; padding-left: 20px;"><h5 id="adress_">ADDRESS :</h5> </div>
+                <div class="address_cover">
+                    <p style="font-size: larger; font-weight: 600;">{{cust_add}}</p>
+                </div>
+            </div>
+                <br>
+            <div class="prd_list">
+                <table style="width: 100%;">
+                    <tr>
+                        <th >product details</th>
+                    </tr>
+                    {% for i in product %}
+                    <tr >
+                        <td style="width: 200px;"><img style="width: 100px; height: 100px;background-color: black;" src="{{i.product.cover_image.url}}" alt=""></td>
+                        <td> <h6>{{i.product.name}}</h6></td>
+                        <td  > <span>{{i.product.price}}</span></td>
+                    </tr>
+                    {% endfor %}
+                    
+                </table>
+            </div>
+
+            <div>
+
+            </div>
+        </div>
+        <!-- end left -->
+
+        <!-- right -->
+        <div class="rgt">
+            <div class="pyment">
+                <table style=" width: 100%;">
+                    <tr>
+                        <th style="height: 40px; color: rgb(165, 166, 167);">
+                            PRICE DETAILS
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr width="100%">
+                        </td>
+                    </tr>
+                    <tr >
+                        <td style="font-size: 17px;padding-top:20px; font-weight: 500;">
+                            price( <span></span> item )
+                        </td>
+                        <td style="font-size: 18 px;padding-top:20px ;font-weight: 500;">
+                            {{total}}
+                        </td>
+                    </tr>
+                    <tr >
+                        <td style="font-size: 17px;padding-top:20px; font-weight: 500;">
+                            tax( 2 %  )
+                        </td>
+                        <td style="font-size: 18 px;padding-top:20px ;font-weight: 500;">
+                            {{tax}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top:20px; font-weight: 500;">delivery charge</td>
+                        <td style="color: green; font-size: 18px;padding-top:20px; font-weight: 500;"> free</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr width="100%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>total price  </h5><p>include tax</p>
+                        </td>
+                        <td>
+                            <h5 id="total">{{total_wite_tax}}</h5>
+                        </td>
+                        <td>   
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="infom">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <h6>payment type</h6>
+                        </td>
+                        <td>
+                            cod<input type="radio" name="pym">
+                        </td>
+                        <td>razeropay    <input name="pym" type="radio"></td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="3" style="padding-top: 20px;">
+                            {% csrf_token %}
+                            <button type="submit" id="rzp-button1" class="c_btn">continue</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+</div>
+<!-- end right -->
+
+    <script>
+        $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()  //passing csrf token in ajax request
+            }
+        })
+
+        $('#rzp-button1').click(function(){
+            // console.log("inside funtion")
+            amount=$("#total").html()
+            console.log(amount)
+            $.ajax({
+                url:'{% url "customer:payment" %}',
+                type:'POST',
+                data:{
+                    'total': amount
+                },
+                success:function(response){
+                    console.log("payment_id="+response.id);
+                    var options={
+                        "key":"rzp_test_AkXK2BPZBLRHG6",
+                        "grandtotal":response.amount,
+                        "currency":"INR",
+                        "name":"men cub",
+                        "id":"1234",
+                        "order_id":response.id,
+                        "handler":function(response){
+                            console.log('handler')
+                            console.log("pid",response.razorpay_payment_id);
+                            console.log("oid",response.razorpay_order_id);
+                            console.log("sig",response.razorpay_signature)
+                            paymentId = response.razorpay_payment_id
+                            orderId = response.razorpay_order_id
+                            signId = response.razorpay_signature 
+                            updatepayment(paymentId,orderId,signId,response.amount)
+                        },
+                        redirect: true,
+
+                        "theme":{
+                            "color":"#3399cc"
+                        }
+                
+                        };
+                        var rzpl=new Razorpay(options);
+                        rzpl.on('payment.failed',function(response){
+                            alert(response.error.code);
+                            alert(response.error.description);
+                            alert(response.error.source);
+                            alert(response.error.step);
+                            alert(response.error.reason);
+                            alert(response.error.metadata.payment_id);
+                        });
+                        rzpl.open();
+
+                    }
+                
+            })
+
+        })
+
+        
+        function updatepayment(a,b,c,grandtotal){
+            console.log('succcccs', a,b,c)
+            $.ajax({
+                url:'{% url "customer:updatepayment" %}',
+                type:'POST',
+                data:{
+                    'totalprice':amount,
+                    'paymentId':a,
+                    'orderId':b,
+                    'signId':c ,
+                    'grandtotal':grandtotal
+                },
+                success:function(response){
+                    alert("Your order placed successfully")
+                    console.log('sucesss')
+                    window.location.reload();
+                }
+            })
+        }
+
+    });
+        
+    </script>
+ 
+{% endblock %}

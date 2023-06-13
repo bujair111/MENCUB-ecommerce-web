@@ -1,0 +1,102 @@
+{% extends "cust_templates/master.html" %}
+{% load static %}
+
+
+{% block title %} home {% endblock %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'cust_css/cust_Profile.css' %}">
+{% endblock %}
+
+
+{% block body %}
+<div class="p_navi">
+    <div id="change_pass" class="div1">EDIT PROFILE</div>
+    <a href="change password"> <div class="div1">CHANGE PASSWORD</div></a>
+    <a href="oderDetails"> <div class="div1">MY ORDERS</div></a>
+</div>
+<!-- =======end 2nd nav -->
+<br>
+<br>
+<div class="main_body">
+    <div class="m-left">
+        <div class="left_1">
+            <img class="p_img" src="{{c_data.image.url}}" alt="">
+        </div>
+        <div class="left_2">
+            <table class="p_tb">
+                <tr>
+                    <td class="td1">NAME :</td>
+                    <td class="td1"><span>{{c_data.name}}</span></td>
+                </tr>
+                <tr>
+                    <td class="td1">PHONE :</td>
+                    <td class="td1"><span>{{c_data.phone}}</span></td>
+                </tr>
+                <tr>
+                    <td class="td1">EMAIL :</td>
+                    <td class="td1"><span>{{c_data.email}}</span></td>
+                </tr>
+                <tr>
+                    <td class="td1">ADDRESS :</td>
+                    <td class="td1"><span>{{c_data.address}}
+                        
+                    </span></td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+<!-- =======edit profile======= -->
+
+    <div class="m-right">
+        <div class="tb_cover" id="edit_tb">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <table class="table1">
+                <tr >
+                    <td class="td1"><input class="input" name="ed_name"  type="text" placeholder="name"></td>
+                    <td class="td1"><input class="input" name="ed_email" type="email" placeholder="email"></td>
+                </tr>
+                <tr >
+                    <td class="td1"><input class="input" name="ed_phone" type="text" placeholder="phone"></td>
+                    <td class="td1"><select class="input" name="ed_gender" name="gender" id="">
+                        <option name="gender" value="">gender</option>
+                        <option name="gender" value="male">male</option>
+                        <option name="gender" value="female">female</option>
+                    </select></td>
+                </tr>
+                <tr >
+                    <td class="td1"><input class="input" name="ed_dob" id="dateinp" type="date" placeholder="date"></td>
+                    <td class="td1"><input class="input" name="ed_address" type="text" placeholder="address"></td>
+                </tr>
+                <tr>
+                    <td class="td1" colspan="2"><input type="file" name="ed_image" placeholder="image"></td>
+                </tr>
+                <tr>
+                    <td class="td1"  ><button class="btn btn-primary" type="submit"> CHANGE</button></td>
+                    <td class="td1"><button id="closebtn"  class="btn btn-warning"> cancel</button></td>
+                </tr>
+            </table> 
+        </form>
+        </div>
+        </div>
+
+</div>
+<script>
+    $(document).ready(function(){
+        $('#change_pass').click(function(){
+            $('.tb_cover').css('display','block')
+        })
+        $('#closebtn').click(function(){
+            $('.tb_cover').css('display','none')
+        })
+        
+        
+
+    })
+</script>
+
+
+{% endblock %}

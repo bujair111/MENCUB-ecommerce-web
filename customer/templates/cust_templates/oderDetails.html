@@ -1,0 +1,72 @@
+{% extends "cust_templates/master.html" %}
+{% load static %}
+
+
+{% block title %} home {% endblock %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'cust_css/oderdetail.css' %}">
+{% endblock %}
+
+
+{% block body %}
+<div class="p_navi">
+    <a href="cust_profile">
+        <div id="change_pass" class="div1">EDIT PROFILE</div>
+    </a>
+    <a href="change password">
+        <div class="div1">CHANGE PASSWORD</div>
+    </a>
+    <a href="">
+        <div class="div1">MY ORDERS</div>
+    </a>
+</div>
+
+<div style="width: 70%; margin-left: auto;margin-right: auto;">
+    <div style="  width: 100%;
+height: 60px;
+background-color: #efefeb;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 20px;
+padding-top: 10px;">
+        <p style="font-size: 20px;">Order Details</p>
+
+    </div>
+{% for order in orders_list %}
+    <div style="height: 100px;margin-top: 6px;display: flex;
+        background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-shadow:  5px 5px 5px #e3e3e3,
+            -5px -5px 2px #ffffff;">
+
+        <div style="width: 60%;height: 100px; display: flex;">
+            <div style="width: 30%;height: 100px; display: flex; align-items: center;justify-content: center;">
+                <img style="width: 80px; height: 80px;" src="{{ order.product.cover_image.url }}" alt="">
+            </div>
+
+            <div style="width: 70%;height: 100px; padding: 7px;">
+                <p>{{ order.product.name }}</p>
+                <p style="font-size: 13px;">date : <span>{{order.date}}</span></p>
+
+            </div>
+
+        </div>
+
+
+        <div style="width: 20%;height: 100px; ">
+            <p style="font-size: larger; font-weight: 500; margin: 10px;">$ <span>{{order.product.price}}</span></p>
+        </div>
+
+        <div style="width: 40%;height: 100px;">
+            <p style="margin: 20px; font-size:large; font-weight: 500;">status : <span>{{order.delivery_status}}</span></p>
+        </div>
+
+    </div>
+{% endfor %}
+
+
+
+</div>
+{% endblock %}

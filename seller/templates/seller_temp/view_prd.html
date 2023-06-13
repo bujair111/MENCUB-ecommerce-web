@@ -1,0 +1,53 @@
+{% extends "seller_temp/seller_master.html" %}
+{% load static %}
+
+{% block title %}update stock{% endblock %}
+
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'seller_css/view_prd.css' %}">
+
+{% endblock %}
+
+{% block body %}
+<div class="main1">
+    <div class="sub">
+        <div class="l">
+            <img class="img1" src="{% static 'c_image/jaket.jpg' %}" alt="">
+        </div>
+        <div class="r">
+            <div style="display: flex;align-items: center;justify-content: center;height: 50px; width: 400px;"><h3>
+                Update Stock
+            </h3></div>
+            <div>
+                <table style="width: 200px; margin-top: 10px; margin-left: 10px;">
+                    <tr>
+                        <td>NAME :</td>
+                        <td>000 </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 10px;">PRICE :</td>
+                        <td>000</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="sizelist"> 
+                <ol>
+                    <li >size : Qty :</li>
+                </ol>
+            </div>
+            <div class="last">
+                <div class="s"><select  name="" id="">
+                    <option value="aaaa">sizes</option>
+                    <option value="aaaa">s</option>
+
+                </select></div>
+                <div class="s"><input placeholder="Qty" type="number"></div>
+                <div class="s"> <button class="btn_up">Update</button> </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

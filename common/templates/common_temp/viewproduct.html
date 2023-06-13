@@ -1,0 +1,550 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view</title>
+    <link rel="icon" href="{% static 'image/icon.png' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <style>
+        .main1{
+    width: 90%;
+    height: 450px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5%;
+    box-shadow: 1px 2px 3px 1px rgba(215, 211, 211, 0.751);
+
+}
+.div2{
+    width: 90%;
+    height: 400px;
+    display: flex;
+    
+}
+.left{
+width: 40%;
+height: 400px;
+border-radius: 15PX;
+overflow: hidden;
+
+}
+.right{
+    width: 60%;
+height: 400px;
+
+}
+.pd_1{
+    width: 80%;
+    height: 100px;
+}
+.td1{
+    font-size: 25px;
+    padding-left: 20px;
+    font-family: 'Anton', sans-serif;
+    font-size: x-large;
+}
+.td2{
+    font-size: 15px;
+    padding-left: 20px;
+    font-family: 'Anton', sans-serif;
+    font-size: large;
+    height: 60px;
+    width: 400px;
+    display: flex;
+    overflow-wrap: break-word;
+}
+.pd_2{
+    width: 80%;
+    height: 130px;
+
+}
+.p_span{
+    font-size: 25px;
+    font-weight: 500;
+    padding-left: 20px;
+    
+}
+.td5{
+    padding-left: 20px;
+
+}
+.select1{
+    width: 110px;
+    border: 0;
+    outline:0;
+    background-color: #e9e6e6;
+    font-size: 14px;
+
+}
+.inp1{
+    width: 110px;
+    border: 0;
+    outline:0;
+    background-color: #e9e6e6;
+}
+.pd_3{
+    width: 80%;
+    height: 50px;
+    display: flex;
+    gap: 50PX;
+    padding-left: 20px;
+
+}
+.btn_1{
+    width: 100PX;
+    height: 40px;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+
+}
+.btn_2{
+    width: 100PX;
+    height: 40px;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.btn_1:hover{
+    transform: scale(1.02);
+    transition: .5s;
+}
+.btn_2:hover{
+    transform: scale(1.02);
+    transition: .5s;
+}
+
+
+
+.footer {
+    width: 100%;
+    height: 200px;
+    background-color: #efefeb;
+    margin-top: 100px;
+    display: flex;
+
+}
+
+.f-l {
+    display: flex;
+    width: 50%;
+    height: 200px;
+    justify-content: center;
+}
+
+.f-r {
+    width: 50%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 5px;
+    padding-right: 10px;
+}
+
+.tb1th {
+    padding-left: 30px;
+    font-size: 15px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.tb1td {
+    padding-left: 30px;
+    font-size: 13px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.tb1td:hover {
+    font-size: 14px;
+}
+
+.tb1 {
+    margin-top: 60px;
+}
+
+.fr-1 {
+    width: 300px;
+    height: 60px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+
+}
+
+.address {
+    padding-top: 5px;
+    padding-right: 15px;
+    font-weight: 600;
+}
+
+.fr-2 {
+    width: 300px;
+    height: 60px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: end;
+}
+
+.fp2 {
+    padding-right: 15px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.fr-3 {
+    width: 200px;
+    height: 40px;
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    float: left;
+    padding: 5px;
+
+}
+
+.fpng {
+    width: 20px;
+}
+
+.fpng:hover {
+    width: 25px;
+
+}
+
+/* ////end footer */
+body {
+    margin: 0;
+    
+}
+a {
+    text-decoration: none;
+}
+
+.main {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    box-shadow: 0px 3px 2px rgba(235, 233, 233, 0.685);
+}
+
+.l {
+    width: 40%;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.r {
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 30px;
+}
+
+.l a {
+    text-decoration: none;
+    font-family: 'Anton', sans-serif;
+    font-size: 30px;
+    color: black;
+    font-weight: 400;
+    letter-spacing: 4px;
+    padding-left: 10px;
+}
+
+.drop {
+    background-color: white;
+    border: 0;
+    border-radius: 30px;
+    width: 30px;
+
+}
+
+.material-symbols-outlined {
+    color: rgb(95, 99, 104);
+    font-weight: bolder;
+    padding-top: 4px;
+    font-size:  x-large;
+    
+}
+
+.material-symbols-outlined:hover {
+    color: rgb(14, 15, 15);
+
+}
+.suburls{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sinp {
+    display: none;
+    border: solid;
+    border-radius: 50px;
+    color: white;
+    background-color: rgba(178, 181, 185, 0.502);
+    width: 250px;
+    height: 35px;
+
+}
+
+
+.sinp::placeholder {
+    color: rgb(10, 10, 10);
+    padding-left: 30px;
+}
+.profil_image{
+    margin: 15px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.p-img{
+background-color: bisque;
+width: 40px;
+height: 40px;
+border-radius: 25px;
+    
+}
+
+    </style>
+
+</head>
+<body>
+        <!-- //////navi////// -->
+        <div class="main">
+            <!-- logo -->
+            <div class="l">
+                <div class=""><a href="{% url 'common:home' %}">MEN CUB</a></div>
+            </div>
+            <!-- e -->
+            <div class="r">
+                <!-- s -->
+                <div>
+                    <form action="{% url 'common:search' %}" method="get">
+                    <input id="ser_inp" class="sinp" name="searched_data" type="text" placeholder="search....">
+                    </form>
+                </div>
+                <div class="">
+                    <span id="ser_btm" class="material-symbols-outlined">
+                        search
+                    </span>
+                </div>
+                <!-- es -->
+                <div class="suburls">
+                    <div class="dropdown">
+                        <button class="drop" class=" dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <span class="material-symbols-outlined">
+                                filter_list
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% for i in catelist %}
+                            <li><a class="dropdown-item" href="{% url 'common:filter' i.id %}">{{i.cate_name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="suburls"><a href="{% url 'common:seller_signup' %}">
+                        <span class="material-symbols-outlined">
+                            add_shopping_cart
+                        </span>
+                    </a></div>
+                <div style="padding-right: 8px;">
+                    <a href="{% url 'common:cust_signup' %}">
+                        <span class="material-symbols-outlined">
+                            account_circle
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- //////end navi.////// -->
+    <div class="main1">
+        <div class="div2">
+            <div class="left">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{prd_dtl.cover_image.url}}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{prd_dtl.image1.url}}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{prd_dtl.image2.url}}" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div style=" margin-left: 30px;" class="right">
+                <div class="pd_1">
+                    <table>
+                        <tr>
+                            <td class="td1">{{prd_dtl.name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="td2">{{prd_dtl.details}} <p> </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="height: 35px;">
+                    <span class="p_span">{{prd_dtl.price}} $ </span>
+                </div>
+                <br>
+                <div class="pd_2">
+                    <table>
+                        <tr>
+                            <td class="td5">
+                                <p style="font-size: 12px;color: green;font-size: 11px; font-weight: 500; ">RATING <span
+                                        style="font-size: 12px;">4.5</span></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td5">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+    
+                                    <select name="size_select" class="select1" name="" id="">
+                                        <option value="">select size</option>
+                                        {% for i in avl_size %}
+                                        <option value="{{i.size_id_id}}">{{i.size_id.sizes}} </option>
+                                        {% endfor %}
+                                    </select> 
+    
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td5" style="padding-top: 10px;">
+                                <input name="qty" class="inp1" type="number" min="1" placeholder="qty">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div class="pd_3">
+                    <a href="{% url 'common:cust_login' %}"> <button  type="button" class="btn_1">BUY NOW</button></a>
+                    <a href="{% url 'common:cust_login' %}"><button type="button" class="btn_2">ADD CART</button></a>
+                </div>
+                <span>{{msg}}</span>
+            </div>
+        </div>
+        </form>
+    </div>
+        <!--     footer     -->
+        <div class="footer">
+            <div class="f-l">
+                <div>
+                    <table class="tb1">
+                        <tr>
+                            <th class="tb1th">Navigate</th>
+                            <th class="tb1th">categories</th>
+                            <th class="tb1th">collections</th>
+                        </tr>
+                        <tr>
+                            <td class="tb1td">about us</td>
+                            <td class="tb1td"> new arrivals</td>
+                            <td class="tb1td">shirts</td>
+                        </tr>
+                        <tr>
+                            <td class="tb1td">contact us</td>
+                            <td class="tb1td"> offers</td>
+                            <td class="tb1td">t shirts</td>
+                        </tr>
+                        <tr>
+                            <td class="tb1td">about us</td>
+                            <td class="tb1td"> new arrivals</td>
+                            <td class="tb1td">pants</td>
+                        </tr>
+                        <tr>
+                            <td class="tb1td">about us</td>
+                            <td class="tb1td"> new arrivals</td>
+                            <td class="tb1td">acsosarice</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="f-r">
+                <div class="fr-1">
+                    <div>
+                        <P class="address">
+                            34B street <br><u>new york,US</u>
+                        </P>
+                    </div>
+                </div>
+                <div class="fr-2">
+                    <p class="fp2">
+                        +91 9539938193 <br>mencub@gmail.com
+                    </p>
+                </div>
+                <div class="fr-3">
+                    <ul>
+                        <li><a href="#"><img class="fpng" src="{% static 'image/twtpng.png' %}" alt=""></a></li>
+                        <li><a href="#"><img style="width: 30px;" class="fpng" src="{% static 'image/wpng.png' %}"
+                                    alt=""></a></li>
+                        <li><a href="#"><img class="fpng" src="{% static 'image/instapng.png' %}" alt=""></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end footer -->
+        <script>
+            $(document).ready(function () {
+                $('#ser_btm').click(function () {
+                    $('#ser_inp').css('display', 'block')
+                })
+                $('#ser_btm').dblclick(function () {
+                    $('#ser_inp').css('display', 'none')
+                })
+            })
+        </script>
+</body>
+</html>

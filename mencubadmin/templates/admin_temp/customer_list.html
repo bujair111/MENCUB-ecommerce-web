@@ -1,0 +1,87 @@
+{% extends "admin_temp/admin_master.html" %}
+{% load static %}
+
+{% block title %}admin panel{% endblock %}
+
+
+{% block head %}
+<style>
+    .main1{
+        width: 100%;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sub1{
+        width: 90%;
+     
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 1px 1px 1px 1px rgba(233, 232, 228, 0.587);
+    }
+    .tbtitile{
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2a2185;
+    }
+    table{
+        width: 100%;
+  border-collapse: collapse;
+
+    }
+    th{
+        height: 35px;
+        text-align: center;
+    }
+    td{
+        text-align: center;
+        height: 25px;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    tr:hover{
+        background-color: #2a2185;
+        color: white;
+    }
+
+
+
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="main1">
+        <div class="sub1">
+            <div class="tbtitile"><h2>Customers</h2></div>
+            <table>
+                <tr>
+                    <th><h4>S No</h4></th>
+                    <th><h4>Name</h4></th>
+                    <th><h4>address</h4></th>
+                    <th><h4>Gender</h4></th>
+                    <th><h4>Phone</h4></th>
+                    <th><h4>Email</h4></th>
+                    <th><h4>image</h4></th>
+                </tr>
+
+                {% for i in cust %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.address}}</td>
+                    <td>{{i.gender}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td><div style="object-fit: cover;">
+                        <img style="height: 50px; width: 50px; border-radius: 50px;" src="{{i.image.url}}" alt="">
+                    </div></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+{% endblock %}

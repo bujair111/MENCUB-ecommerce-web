@@ -1,0 +1,30 @@
+.text_bar{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text_bar h4{
+    font-size: xx-large;
+    color: rgb(9, 75, 23);
+}
+.body1{
+    width: 100%;
+    
+
+}
+.cart_table{
+    width: 80%;
+    margin-left: 10%;
+    background-color: rgb(238, 240, 245);
+    
+}
+.th1{
+    padding-bottom: 10px;
+    background-color: rgb(238, 240, 245);
+text-align: center;
+}
+.td1{
+text-align: center;
+}

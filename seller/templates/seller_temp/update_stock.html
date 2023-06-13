@@ -1,0 +1,293 @@
+{% extends "seller_temp/seller_master.html" %}
+{% load static %}
+
+{% block title %}stock update{% endblock %}
+
+
+{% block head %} 
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<style>
+    /* ===================selection============= */
+    .main1{
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    .sub1{
+        width: 80%;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        box-shadow: 1px 2px 3px #d1d2d3c2;
+        background-color: #f8f9fa;
+    }
+    .selecters{
+        width: 180px;
+        height: 45px;
+        border: 2px solid black;
+        border-radius: 5px;
+        
+        
+    }
+    .ck_btn{
+        width: 80px;
+        height: 35px;
+        border-radius: 10px;
+        border: 0;
+        color: white;
+        font-size: 15px;
+        background-color: rgb(8, 77, 8);
+    }
+    .ck_btn:hover{
+        transform: scale(1.05);
+        transition: 0s.5;
+    }
+
+    /* .option{
+        background-color: white;
+        color: black;
+        
+        height: 35px;
+    } */
+/* ==============details============ */
+    .main2{
+        width: 100%;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+
+    .show_prd{
+        width: 83%;
+        height: 290px;
+        display: flex;
+        box-shadow: 1px 2px 3px #d1d2d3c2;
+        background-color: #f8f9fa;
+
+
+    }
+    .image1{
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 200px;
+        height: 200px;
+        background-color: coral;
+        object-fit: cover;
+        overflow: hidden;
+        margin-left: 10px;
+    }
+    .details{
+        width: 300px;
+        height: 290px;
+    }
+    .oprate{
+        width: 300px;
+        height: 290px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        
+        
+    }
+
+    .o1{
+    margin-top: 5px;
+    margin-left: 50px;
+    list-style-type: none;
+}
+.l1{
+    padding-left: 10px;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+
+
+
+.s{
+    width: 180px;
+    height: 30px;
+    overflow: hidden;
+
+   
+}
+select{
+    width: 100px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+
+}
+input{
+    width: 100px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+
+}
+.btn_up{
+    width: 180px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+
+}
+.btn_up:hover{
+    background-color: black;
+    color: white;
+}
+</style>
+
+{% endblock %}
+
+{% block body %}
+<div style="width: 100%;height: 50px;display: flex;align-items: center;justify-content: center;">
+<h2>Update Stock</h2>
+</div>
+<!-- =====================selection============ -->
+<div class="main1">
+    <div class="sub1">
+        <!-- category -->
+        <div ><select id="cate_selecter" class="selecters" name="" id="">
+            <option value="">categories</option>
+            {% for i in cate %}
+            <option  value="{{i.id}}">{{i.cate_name}}</option>
+            {% endfor %}
+        </select></div>
+        <!-- prd -->
+        
+        <div >
+            <form action=""></form>
+            {% csrf_token %}
+            <select id="prdlist" class="selecters" name="" id="">
+                <option value="">Product id</option>
+                <option value=""></option>
+            </select>
+        </form>
+        </div>
+
+        <div style="width: 100px; visibility: hidden;"></div>
+
+        <div><button id="select_prd_stock_check" class="ck_btn">Check Prd</button></div>
+    </div>
+
+</div>
+<!-- ==================details================= -->
+<div class="main2">
+    <div class="show_prd">
+
+        <div class="image1">
+            <img src="" alt="">
+        </div>
+
+        <div class="details">
+            <h4 style="margin-left: 60px; margin-top: 10px; padding:0;">Name : <span id="prd_name"></span> </h4><br>
+            <h5 style="margin-left: 78px;">current stock</h5><br>
+            <ol id="stock_ol" class="o1">
+                <!-- <li class="l1" >size : sm | Qty : 45</li> -->
+                
+            </ol>
+        </div>
+
+        <div class="oprate">
+          
+            <div ><select class="s"  name="" id="select_size">
+                <option value="">sizes</option>
+                {% for i in size %}
+                <option value="{{i.id}}">{{i.sizes}}</option>
+                {% endfor %}
+            </select></div>
+            <div ><input class="s" placeholder="Qty" id="Qty" min="0" type="number"></div>
+            <div class="s"> <button id="update_btn"  class="btn_up">Update</button> </div>
+  
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        // listing prd for selected category 
+        $('#cate_selecter').change(function(){
+            cate_id = {'cateid':$('#cate_selecter').val()}
+            console.log(cate_id)
+            $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val() 
+            }
+        })
+            $.ajax({
+                url: "{% url 'seller:view_prd' %}",
+                type:'POST',
+                data: cate_id,
+                success: function(response){
+                var prdDetails = '' 
+                for (var i = 0; i < response.data.length; i++) {
+                    var option = response.data[i];
+                    prdDetails += '<option value="' + option.id + '">' + option.prd_no + '</option>';
+                }
+                $('#prdlist').html(prdDetails);
+            }
+            })
+        })
+        //=======================
+
+        // =========PRODUCT DETAILS
+        $('#select_prd_stock_check').click(function(){
+            select_prd ={'select_prd_id':$('#prdlist').val()}
+            console.log(select_prd)
+
+            $.ajax({
+                url: "{% url 'seller:selected_prd_img_name' %}",
+                type:'POST',
+                data: select_prd,
+                success: function(response){
+                    console.log(response.data)
+                    $('#prd_name').html(response.data.name)
+                    // ======stock listing=============
+                    // console.log(response.stock)
+                    var stocks_list =''
+                    for (var i = 0;i< response.stock.length;i++){
+                        var data = response.stock[i];
+                        stocks_list += '<li class="l1">' + 'SIZE :' + data.size+'| qty :'+data.qty + '</li>';
+                    }
+                    $('#stock_ol').html(stocks_list)
+                    
+                }
+            })
+        })
+        // ===============
+        $('#update_btn').click(function(){
+            datas = {
+                'product_id':$('#prdlist').val(),
+                'selected_size':$('#select_size').val(),
+                'qty':$('#Qty').val()
+            }
+            console.log(datas)
+            $.ajax({
+                url:"{% url 'seller:add_variants' %}",
+                data: datas,
+                type:'POST',
+                success: function(response){
+                    alert(response.msg)
+                }
+            })
+
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .table_cover {
+            width: 100%;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border-spacing: 0;
+        }
+
+        th {
+            height: 40px;
+            font-size: 17px;
+            border-spacing: 0;
+            background-color: white;
+            color: rgb(11, 10, 10);
+        }
+
+        td {
+            border-spacing: 0;
+            height: 30px;
+            text-align: center;
+            font-size: 15px;
+            font-size: medium;
+        }
+
+        tr:hover {
+            background-color: rgb(21, 21, 203);
+            color: white;
+        }
+
+        tr {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+
+        }
+
+        .text_space {
+            width: 100%;
+            height: 40px;
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: red;
+        }
+
+        .btn_add {
+            width: 100px;
+            height: 35px;
+            border-radius: 6px;
+            border: 0;
+            background-color: blue;
+            justify-content: center;
+            color: whitesmoke;
+            font-size: 15px;
+        }
+
+        .btn_add:hover {
+            transform: scaleX(1.02);
+            transition: .02s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text_space">
+        <h2>ORDERS LIST</h2>
+    </div>
+
+    <div class="table_cover">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">SI NO </th>
+                    <th scope="col">ORD DATE</th>
+                    <th scope="col">PRD NAME</th>
+                    <th scope="col">PRD SIZE</th>
+                    <th scope="col">CUST NAME</th>
+                    <th scope="col">CUST MOBAIL</th>
+                    <th scope="col">SHIPPING ADDRESS</th>
+                    <th scope="col">PRD QTY</th>
+                    <th scope="col">TOTAL PRICE</th>
+                    <th scope="col">PAYMENT STATUS</th>
+                    <th scope="col">DELIVERY STATUS</th>
+                    <th scope="col">DELIVERED</th>
+
+
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in oder_list %}
+                <tr>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td>
+                        {{ order.date }}
+                    </td>
+                    <td>
+                        {{ order.product.name }}
+                    </td>
+                    <td>
+                        {{ order.product.price }}
+                    </td>
+                    <td>
+                        {{ order.customer.name }}
+                    </td>
+                    <td>
+                        {{ order.customer.phone }}
+                    </td>
+                    <td>
+                        {{ order.customer.address }}
+                    </td>
+                    <td>
+                        {{ order.quantity }}
+                    </td>
+                    <td>
+                        {{ order.total }}
+                    </td>
+                    <td>
+                        {{ order.payment_status }}
+                    </td>
+                    <td>
+                        {{ order.delivery_status }}
+                    </td>
+                    </td>
+                    <td><a href="{% url 'seller:check_out' order.id %}"><button class="btn_add">check out</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text_space">
+        <a href="seller_home"><button class="btn_add">home</button></a>
+    </div>
+</body>
+
+</html>

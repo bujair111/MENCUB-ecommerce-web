@@ -1,0 +1,85 @@
+{% extends "cust_templates/master.html" %}
+{% load static %}
+
+{% block title %} home {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'cust_css/cust_home.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="body1">
+
+</div>
+<br>
+<br>
+<br>
+<div class="body2">
+
+
+    <div class="aaa">
+        <div class="c-c-grid">
+            <span><a  style="color: black;" href="{% url 'customer:allproducts' %}">ALL PRODUCT</a></span>
+        </div>
+
+        <div id="g1" class="c-grid">
+        </div>
+    </div>
+
+    <div class="aaa">
+        <div class="c-c-grid">
+
+            <span> <a style="color: black;" href="{% url 'customer:result' 1 %}">ACCESSORIES</a></span>
+        </div>
+        <div id="g2" class="c-grid">
+        </div>
+    </div>
+
+    <div class="aaa">
+        <div class="c-c-grid"><span><a style="color: black;" href="{% url 'customer:result' 3 %}">OUTERWEAR</a></span></div>
+        <div id="g3" class="c-grid">
+        </div>
+    </div>
+
+    <div class="aaa">
+        <div class="c-c-grid">
+            <span><a style="color: black;" href="{% url 'customer:result' 6 %}">SHORTS</a></span>
+        </div>
+
+        <div id="g4" class="c-grid">
+        </div>
+    </div>
+
+    <div class="aaa">
+        <div class="c-c-grid">
+            <span><a style="color: black;" href="{% url 'customer:result' 7 %}">SNEAKER</a></span>
+        </div>
+        <div id="g5" class="c-grid"></div>
+    </div>
+</div>
+<br>
+
+<div class="text1">
+    VIEW ALL PRODUCTS
+</div>
+
+<br><br>
+<div id="card-box" class="row">
+    {% for i in product %}
+    <div class="card" style="width: 15rem; height: 330px;">
+        <a href="{% url 'customer:product_details' i.id %}" style="text-decoration: none; margin: 0;padding: 0;">
+            <div style="overflow: hidden; width: 15rem; margin-left: -13px;"><img style="width:110%; "
+                    src="{{i.cover_image.url}}" class="card-img-top" alt=""></div>
+        </a>
+        <h6 class="card-title" style="margin-top: 5px;"><span>{{i.name}}</span></h6>
+
+        <div style="font-weight: 700;"> {{i.price}} $ </div>
+        <div style="color: green;">4.8</div>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}

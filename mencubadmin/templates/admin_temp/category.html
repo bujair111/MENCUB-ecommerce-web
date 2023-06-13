@@ -1,0 +1,159 @@
+{% extends "admin_temp/admin_master.html" %}
+{% load static %}
+
+{% block title %}admin panel{% endblock %}
+
+
+{% block head %}
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<style>
+
+    .main1{
+        width: 100%;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .sub1{
+        width: 90%;
+     
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 1px 1px 1px 1px rgba(233, 232, 228, 0.587);
+    }
+    .tbtitile{
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #2a2185;
+    }
+    table{
+        width: 100%;
+  border-collapse: collapse;
+
+    }
+    th{
+        height: 35px;
+        text-align: center;
+    }
+    td{
+        text-align: center;
+        height: 25px;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    tr:hover{
+        background-color: #2a2185;
+        color: white;
+    }
+    .ADDBTN{
+        width: 100px;
+        height: 35px;
+        border: 4px solid #2a2185 ;
+        border-radius: 3px;
+        color: white;
+        font-weight: 400;
+        margin-right: 20px;
+        background-color: #2a2185;
+    }
+    .ADDBTN:hover{
+        transform: scale(1.02);
+        transition: .2s;
+    }
+
+
+
+
+    .main2{
+        width: 100%;
+        margin-top: 30px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+     
+        }
+    .sub2{
+        width: 90%; 
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 1px 1px 1px 1px rgba(233, 232, 228, 0.587);
+    }
+
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div id="main2" style="display: none;" >
+<div  class="main2">
+    <div class="sub2">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <td>category name</td>
+                <td><input required name="cate_name" type="text"></td>
+            </tr>
+            <tr>
+                <td>description</td>
+                <td><textarea required name="cate_des" id="" cols="30" rows="6"></textarea></td>
+            </tr>
+            <tr>
+                <td>image</td>
+                <td><input required name="cate_image" type="file"></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2"><button class="ADDBTN">add</button><button id="closebtn" class="ADDBTN">close</button></td>
+            </tr>
+        </table>        
+        </form>
+    </div>
+</div>
+</div>
+<div>
+    {{msg}}
+</div>
+
+    <div class="main1">
+        <div class="sub1">
+            <div class="tbtitile"><h2>Category list</h2>    <button id="add_btn" class="ADDBTN">Add Category</button></div>
+            <table>
+                <tr>
+                    <th><h4>cat_id</h4></th>
+                    <th><h4>Category Name</h4></th>
+                    <th><h4>Description</h4></th>
+                    <th><h4>Cat Image</h4></th>
+                    
+                </tr>
+                {% for i in cat %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.cate_name}}</td>
+                    <td style="text-align: justify;height: auto;">{{i.cate_description}}</td>
+                    <td><div style="object-fit: cover;">
+                        <img  style="width: 80px;height: 80px;" src="{{i.cate_image.url}}" alt="">
+                    </div></td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#add_btn').click(function(){
+                $('#main2').css('display','block');
+            })
+
+            $('#closebtn').click(function(){
+                $('#main2').css('display','none');
+            })
+        })
+    </script>
+    
+{% endblock %}

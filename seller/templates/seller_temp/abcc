@@ -1,0 +1,9 @@
+{% extends "seller_temp/seller_master.html" %}
+{% load static %}
+
+{% block title %}seller home{% endblock %}
+
+
+{% block head %} {% endblock %}
+
+{% block body %}{% endblock %}

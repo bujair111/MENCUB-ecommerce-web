@@ -1,0 +1,110 @@
+{% extends "seller_temp/seller_master.html" %}
+{% load static %}
+
+{% block title %}add product{% endblock %}
+
+
+{% block head %} 
+<style>
+.text_space{
+        width: 100%;
+        height: 40px;
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color:var(--blue);
+    }
+    .inpt_cover{
+        width: 70%;
+        margin-left: 15%;
+        margin-top: 20px;
+        height: 400px;
+        box-shadow: 1px 2px 2px rgb(223, 220, 226);
+    }
+    input{
+        width: 200px;
+        height: 30px;
+        border: 0;
+        border-radius: 6px;
+        outline: 0;
+        background-color:#edf4fa;
+    }
+    .btn_add{
+        width: 100px;
+        height: 35px;
+        border-radius: 6px;
+        border: 0;
+        background-color: var(--blue);
+        justify-content: center;
+        color: whitesmoke;
+        font-size: 15px;
+    }
+    .btn_add:hover{
+        transform: scaleX(1.02);
+        transition: .02s;
+    }
+    
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="text_space">
+    <h2>ADD PRODUCT</h2>
+</div>
+
+<div class="inpt_cover">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <table style="width: 100%; margin-left: 20px;">
+        <tr>
+            <td>product name :</td>
+            <td> <input name="name"  type="text"></td>
+        </tr>
+        <tr>
+            <td>product no :</td>
+            <td> <input name="prd_no" type="text"></td>
+        </tr>
+        <tr>
+            <td>product category :</td>
+            <td> <select name=" category" id="">
+                <option value="">category</option>
+                {% for i in catelist %}
+                <option value="{{i.id}}">{{i.cate_name}}</option>
+                {% endfor %}
+            </select></td>
+        </tr>
+        <tr>
+            <td> description :</td>
+            <td> <textarea name="details" id="" cols="30" rows="10" style="width: 198px;height: 43px;"></textarea></td>
+        </tr>
+        <tr>
+            <td>product price :</td>
+            <td> <input name="price" type="text"></td>
+        </tr>
+        <!-- <tr>
+            <td>product stock :</td>
+            <td> <input type="number"></td>
+        </tr> -->
+        <tr>
+            <td>cover image :</td>
+            <td> <input name="cover_image" type="file"></td>
+        </tr>
+        <tr>
+            <td>product image2 :</td>
+            <td> <input name="image2" type="file"></td>
+        </tr>
+        <tr>
+            <td>product image3 :</td>
+            <td> <input name="image3" type="file"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><span>{{msg}}</span></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><button class="btn_add">ADD</button></td>
+        </tr>
+    </table>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends "cust_templates/master.html" %}
+{% load static %}
+
+{% block title %} My Cart {% endblock %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'cust_css/cart.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+{% endblock %}
+
+
+{% block body %}
+{% if grandtotal == 0 %}
+<div style="width: 100%; display: flex;align-items: center;justify-content: center; flex-direction: column;">
+    <img style="height: 200px;" src="{% static 'c_image/Add to Cart.gif' %}" alt="">
+    <h2>Nothing Added To Cart</h2>
+</div>
+{%  else %}
+<div class="text_bar">
+    <div>
+        <h4>Basket</h4>
+    </div>
+</div>
+<br>
+<br>
+<div class="body1">
+    <table class="cart_table">
+        <tr>
+            <th class="th1">IMAGE</th>
+            <th class="th1">NAME</th>
+            <th class="th1">QTY</th>
+            <th class="th1">Size</th>
+            <th class="th1">PRICE</th>
+            <th class="th1">TOTAL</th>
+            <th class="th1">remove</th>
+
+        </tr>
+        {% for i in data %}
+        <tr>
+            {% csrf_token %}
+            <td class="td1"> <img style="width: 100px; height: 100px;" src="{{i.product.cover_image.url}}" alt="">
+                <div>
+                </div>
+            </td>
+            <td class="td1">{{i.product.name}}</td>
+
+            <td class="td1"><input id="inp_{{i.size.size_id_id}}{{i.product.id}}" value="{{i.qty}}" class="qty_update"
+                    item-price={{i.product.price}} item-size="{{i.size.size_id_id}}" item-id="{{i.product.id}}"
+                    style="width: 60px;" type="number" min="1"   >
+            </td>
+
+            <td class="td1">{{i.size.size_id.sizes}}</td>
+
+            <td class="td1">{{i.product.price}}</td>
+
+            <td class="td1" id="total_{{i.product.id}}{{i.size.size_id_id}}">{{i.total}}</td>
+
+            <td class="td1">
+                <div>
+                    <a href="{% url 'customer:crt_remove' i.product_id i.size_id %}"> <button
+                            style="width: 80px;height: 30px;border-radius: 5px;color: white;background-color: red; border: 0;">remove</button></a>
+                </div>
+            </td>
+
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> <span id="spn" style="color: red;font-size: 14px;"></span></td>
+            <td class="td1"> totele</td>
+            <td class="td1" id="grand">{{grandtotal}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> </td>
+            <td class="td1">tax</td>
+            <td  class="td1" id="tax">{{tax}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td> <span id="spn" style="color: red;font-size: 14px;"></span></td>
+            <td class="td1">grand total include all taxes </td>
+            <td class="td1" id="grand_tax">{{main_total}}</td>
+        </tr>
+    </table>
+
+</div>
+<div class="text_bar">
+    <a href="chechout"> <button style="margin-top: 40px" class="btn btn-secondary">check out now</button></a>
+</div>
+{% endif %}
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.qty_update', function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
+                }
+            })
+
+            var qty = $(this).val()
+            var price = $(this).attr('item-price')
+            var size = $(this).attr('item-size')
+            var product_id = $(this).attr('item-id')
+
+            console.log(qty, size, product_id)
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'customer:change_qty_update' %}",
+                data: {
+                    'qty': qty,
+                    'size': size,
+                    'prd_id': product_id
+                },
+                success: function (response) {
+                    if (response.status == true) {
+                        total = qty * price
+
+                        // max = (response.maxl)
+                        $('#total_' + product_id + size).text(total)
+                        $('#grand').text("RS:" + response.gt_tot)
+                        $('#inp_' + size + product_id).css('color', 'black')
+                        $('#tax').html(response.tax)
+                        $('#grand_tax').html(response.main_total)
+                        $('#spn').html('')
+
+                        
+                    }
+                    else if (response.status == false) {
+                        $('#inp_' + size + product_id).css('color', 'red')
+                        $('#spn').html('out of stock')
+                    }
+                }
+            })
+
+
+
+
+
+        })
+    })
+</script>
+
+{% endblock %}

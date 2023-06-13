@@ -1,0 +1,23 @@
+.p_navi{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    
+}
+.div1{
+    margin-right: 10px;
+    margin-left: 10px;
+    color: black;
+
+}
+.div1:hover{
+    transform: scale(1.1);
+    transition: .5s;
+}
+a{
+    text-decoration: non;
+}
+/* ////////////////end 2nd nav */
+

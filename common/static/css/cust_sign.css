@@ -1,0 +1,89 @@
+.main1{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.sub1{
+    width: 70%;
+    height: 90%;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+
+}
+.p1{
+width: 40%;
+height: 100%;
+background-image: url('../image/signpageimage.jpeg');
+background-size: cover;
+}
+.p2{
+    width: 60%;
+    height: 100%;
+    background-color: #f7f7f7;
+    }
+.p2-2{
+    margin-top: 40%;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+td{
+    padding-left: 15px;
+}
+
+.input{
+    width: 100%;
+    height: 33px;
+    margin-top: 8px;
+    margin-left:5px;
+    border: 0;
+    border-radius: 5px;
+    outline: 0;
+    
+}
+.input:hover{
+transform: scale(1.05);
+transition: 2s;
+}
+#dateinp{
+    font-size: 13px;
+}
+input::placeholder{
+    font-size: 13px;
+    font-family: 'Anton', sans-serif;
+    padding-left: 10px;
+}
+select{
+    font-size: 13px;
+}
+span{
+    font-size: 14px;
+    font-family: 'Anton', sans-serif;
+margin-left: 10px;
+}
+p{
+    font-size: 13px;
+    color: rgb(104, 104, 96);
+}
+a{
+    font-size: 14px;
+    text-decoration: none;
+    color: rgb(104, 104, 96);
+    
+}
+h6{
+    font-family: 'Anton', sans-serif;
+    
+    font-size:28px;
+}
+#namespan{
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 3px;
+    font-size:32px;
+}
